@@ -35,13 +35,24 @@ source $ZSH/oh-my-zsh.sh
 
 alias venv="source /root/venv/bin/activate"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Ensure Node.js and mcp-hub are installed on terminal start
+if ! nvm ls 22.14.0 > /dev/null 2>&1; then
+    nvm install v22.14.0
+fi
+
+if ! npm list -g mcp-hub@1.7.1 > /dev/null 2>&1; then
+    npm install -g mcp-hub@1.7.1
+fi
+
 alias vi="vim"
 
 vim() {
     FLAG="/root/.cache/nvim/mason_installed.flag"
     if [ ! -f "$FLAG" ]; then
-		nvm install v22.14.0 
-		npm install -g mcp-hub@1.7.1
         nvim -c 'MasonInstall clang-format codelldb' -c "TSInstall c cpp bash cmake make" "$@"
         # Create the flag file so we don't run initialization again
         touch "$FLAG"

@@ -16,14 +16,13 @@ for _, lsp in ipairs(lsp_servers) do
 end
 
 lspconfig.clangd.setup {
+  cmd = { "clangd", "--offset-encoding=utf-16" },
   on_attach = function(client, bufnr)
-	client.server_capabilities.signatureHelpProvider = false
-	on_attach(client, bufnr)
-   end,
-   capabilities = capabilities,
-
+    client.server_capabilities.signatureHelpProvider = false
+    on_attach(client, bufnr)
+  end,
+  capabilities = capabilities,
 }
-
 
 -- configuring single server, example: typescript
 -- lspconfig.ts_ls.setup {
