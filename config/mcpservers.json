@@ -15,6 +15,13 @@
         "-y",  
         "@modelcontextprotocol/server-sequential-thinking"  
       ]  
+    },
+    "gdrive": {  
+      "command": "npx",  
+      "args": [  
+        "-y",  
+        "@modelcontextprotocol/server-gdrive"  
+      ]  
     }  
   }  
 }
