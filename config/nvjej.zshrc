@@ -44,8 +44,8 @@ if ! nvm ls 22.14.0 > /dev/null 2>&1; then
     nvm install v22.14.0
 fi
 
-if ! npm list -g mcp-hub@1.7.1 > /dev/null 2>&1; then
-    npm install -g mcp-hub@1.7.1
+if ! npm list -g mcp-hub@1.8.0 > /dev/null 2>&1; then
+    npm install -g mcp-hub@1.8.0
 fi
 
 alias vi="vim"
