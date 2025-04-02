@@ -6,7 +6,7 @@
 #    By: jeportie <jeportie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 12:58:41 by jeportie          #+#    #+#              #
-#    Updated: 2025/04/01 22:19:42 by jeportie         ###   ########.fr        #
+#    Updated: 2025/04/02 12:43:36 by JeromeP          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,11 @@
 FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Locale Configuration ******************************************************* #
-RUN apt-get update && apt-get install -y locales locales-all && \
-    locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8 && \
+# Install necessary packages
+RUN apt-get update && \
+    apt-get install -y locales locales-all python3-venv && \
+    locale-gen en_US.UTF-8 && \
+    update-locale LANG=en_US.UTF-8 && \
     rm -rf /var/lib/apt/lists/*
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
