@@ -90,7 +90,7 @@ else
 fi
 
 # Define the desired version of @anthropic-ai/claude-code
-CLAUDE_CODE_VERSION="latest" Check
+CLAUDE_CODE_VERSION="latest"
 
 # Check if @anthropic-ai/claude-code is installed globally
 if ! npm list -g @anthropic-ai/claude-code@"$CLAUDE_CODE_VERSION" > /dev/null 2>&1; then
@@ -104,15 +104,7 @@ fi
 claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem / /
 claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking
 claude mcp add brave-search -- npx -y @modelcontextprotocol/server-brave-search
-pip install mcp-server-git
-#claude mcp add docker -- npx -y @modelcontextprotocol/server-docker
-#claude mcp add figma --env FIGMA_API_KEY="$FIGMA_API_KEY" -- npx -y @modelcontextprotocol/server-figma
-# claude mcp add notion --env NOTION_API_KEY="$NOTION_API_KEY" -- npx -y @modelcontextprotocol/server-notion
-# claude mcp add gdrive --env GDRIVE_API_KEY="$GDRIVE_API_KEY" -- npx -y @modelcontextprotocol/server-gdrive
-#claude mcp add ui-design -- npx -y @modelcontextprotocol/server-ui-design
 claude mcp add puppeteer -- npx -y @modelcontextprotocol/server-puppeteer
-# claude mcp add sentry --env SENTRY_API_KEY="$SENTRY_API_KEY" -- npx -y @modelcontextprotocol/server-sentry
-#claude mcp add browser-tools -- npx -y @agentdeskai/browser-tools-server@latest
 
 # Launch zsh.
 exec zsh

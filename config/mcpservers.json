@@ -16,22 +16,11 @@
         "@modelcontextprotocol/server-sequential-thinking"
       ]
     },
-    "git": {
-      "command": "uvx",
-      "args": ["mcp-server-git", "--repository", "path/to/git/repo"]
-	},
     "puppeteer": {
       "command": "npx",
       "args": [
         "-y",
         "@modelcontextprotocol/server-puppeteer"
-      ]
-    },
-    "brave-search": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-brave-search"
       ]
     }
   }
