@@ -39,6 +39,81 @@ fi
 # Disable dubious ownership check globally.
 git config --global --add safe.directory "*"
 
+# Load API keys from the secrets file
+if [ -f /sh/load_api_keys.sh ]; then
+    echo "Running /sh/load_api_keys.sh to load environment variables..."
+    source /sh/load_api_keys.sh
+else
+    echo "Warning: /sh/load_api_keys.sh not found. Skipping API key loading."
+fi
+
+# Initialize NVM
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    source "$NVM_DIR/nvm.sh"
+    echo "nvm initialized."
+else
+    echo "nvm initialization script not found at $NVM_DIR/nvm.sh. Skipping Node.js setup."
+fi
+
+# Ensure Node.js version and mcp-hub are installed
+NODE_VERSION="v22.14.0"
+MCP_VERSION="1.8.0"
+
+# Install Node.js version if not already installed
+if command -v nvm > /dev/null 2>&1; then
+    if ! nvm ls "$NODE_VERSION" > /dev/null 2>&1; then
+        echo "Installing Node.js $NODE_VERSION via nvm..."
+        nvm install "$NODE_VERSION"
+    else
+        echo "Node.js $NODE_VERSION is already installed."
+    fi
+else
+    echo "nvm not available after initialization attempt."
+fi
+
+# Use the desired Node.js version explicitly before npm install
+if command -v nvm > /dev/null 2>&1; then
+    nvm use "$NODE_VERSION"
+fi
+
+# Check if npm is available now before installing mcp-hub
+if command -v npm > /dev/null 2>&1; then
+    if ! npm list -g mcp-hub@"$MCP_VERSION" > /dev/null 2>&1; then
+        echo "Installing mcp-hub@$MCP_VERSION globally..."
+        npm install -g mcp-hub@"$MCP_VERSION"
+    else
+        echo "mcp-hub@$MCP_VERSION is already installed."
+    fi
+else
+    echo "npm not found. Skipping mcp-hub installation."
+fi
+
+# Define the desired version of @anthropic-ai/claude-code
+CLAUDE_CODE_VERSION="latest"
+
+# Check if @anthropic-ai/claude-code is installed globally
+if ! npm list -g @anthropic-ai/claude-code@"$CLAUDE_CODE_VERSION" > /dev/null 2>&1; then
+    echo "Installing @anthropic-ai/claude-code@$CLAUDE_CODE_VERSION globally..."
+    npm install -g @anthropic-ai/claude-code@"$CLAUDE_CODE_VERSION"
+else
+    echo "@anthropic-ai/claude-code@$CLAUDE_CODE_VERSION is already installed."
+fi
+
+# Add MCP servers
+claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem / /
+claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking
+claude mcp add brave-search -- npx -y @modelcontextprotocol/server-brave-search
+claude mcp add git -- npx -y @modelcontextprotocol/server-git
+claude mcp add docker -- npx -y @modelcontextprotocol/server-docker
+#claude mcp add figma --env FIGMA_API_KEY="$FIGMA_API_KEY" -- npx -y @modelcontextprotocol/server-figma
+# claude mcp add notion --env NOTION_API_KEY="$NOTION_API_KEY" -- npx -y @modelcontextprotocol/server-notion
+# claude mcp add gdrive --env GDRIVE_API_KEY="$GDRIVE_API_KEY" -- npx -y @modelcontextprotocol/server-gdrive
+claude mcp add ui-design -- npx -y @modelcontextprotocol/server-ui-design
+claude mcp add puppeteer -- npx -y @modelcontextprotocol/server-puppeteer
+# claude mcp add sentry --env SENTRY_API_KEY="$SENTRY_API_KEY" -- npx -y @modelcontextprotocol/server-sentry
+claude mcp add browser-tools -- npx -y @agentdeskai/browser-tools-server@latest
+
 # Launch zsh.
 exec zsh
 

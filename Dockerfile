@@ -6,7 +6,7 @@
 #    By: jeportie <jeportie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 12:58:41 by jeportie          #+#    #+#              #
-#    Updated: 2025/03/16 14:26:57 by jeportie         ###   ########.fr        #
+#    Updated: 2025/04/01 22:19:42 by jeportie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,3 +91,7 @@ RUN nvim --headless +"Lazy! sync" +qa
 RUN cp -r /root/.cache /root/.default.cache
 RUN cp -r /root/.config /root/.default.config
 RUN cp -r /root/.local /root/.default.local
+
+# Export API keys
+COPY script/load_api_keys.sh /sh/load_api_keys.sh
+RUN chmod +x /sh/load_api_keys.sh

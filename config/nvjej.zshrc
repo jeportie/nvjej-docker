@@ -40,13 +40,13 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Ensure Node.js and mcp-hub are installed on terminal start
-if ! nvm ls 22.14.0 > /dev/null 2>&1; then
-    nvm install v22.14.0
-fi
-
-if ! npm list -g mcp-hub@1.8.0 > /dev/null 2>&1; then
-    npm install -g mcp-hub@1.8.0
-fi
+# if ! nvm ls 22.14.0 > /dev/null 2>&1; then
+#     nvm install v22.14.0
+# fi
+#
+# if ! npm list -g mcp-hub@1.8.0 > /dev/null 2>&1; then
+#     npm install -g mcp-hub@1.8.0
+# fi
 
 alias vi="vim"
 
