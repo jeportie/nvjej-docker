@@ -59,16 +59,21 @@ sepcat() {
 '
 
 # Append the alias definition to ~/.zshrc if it doesn't already exist.
-if ! grep -Fq "nvjej() {" ~/.zshrc; then
-    echo "$alias_definition" >> ~/.zshrc
-    echo "Alias 'nvjej' added to ~/.zshrc. Please run 'source ~/.zshrc' or restart your terminal."
-else
-    echo "Alias 'nvjej' already exists in ~/.zshrc."
+if grep -Fq "nvjej() {" ~/.zshrc; then
+    # Remove the existing alias definition
+    sed -i '/nvjej() {/,/}/d' ~/.zshrc
+    echo "Old alias 'nvjej' removed from ~/.zshrc."
 fi
+# Append the new alias definition
+echo "$alias_definition" >> ~/.zshrc
+echo "Alias 'nvjej' added to ~/.zshrc. Please run 'source ~/.zshrc' or restart your terminal."
+
 # Append the alias definition2 to ~/.zshrc if it doesn't already exist.
-if ! grep -Fq "sepcat() {" ~/.zshrc; then
-    echo "$alias_definition2" >> ~/.zshrc
-    echo "Alias 'sepcat' added to ~/.zshrc. Please run 'source ~/.zshrc' or restart your terminal."
-else
-    echo "Alias 'sepccat' already exists in ~/.zshrc."
+if grep -Fq "sepcat() {" ~/.zshrc; then
+    # Remove the existing alias definition
+    sed -i '/sepcat() {/,/}/d' ~/.zshrc
+    echo "Old alias 'sepcat' removed from ~/.zshrc."
 fi
+# Append the new alias definition
+echo "$alias_definition2" >> ~/.zshrc
+echo "Alias 'sepcat' added to ~/.zshrc. Please run 'source ~/.zshrc' or restart your terminal."
