@@ -68,6 +68,9 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | b
     . ~/.nvm/nvm.sh && \
     nvm install node
 
+# Install UV installer.
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+
 #RUN nvm install v22.14.0 
 #RUN npm install -g mcp-hub@1.7.1
 
