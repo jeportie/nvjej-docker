@@ -57,3 +57,11 @@ RUN cp -r /root/.local /root/.default.local
 
 # COPY avante mcp congif file
 COPY config/mcpservers.json /root/.mcp/mcpservers.json
+
+# COPY claude code mcp configs 
+COPY claude_code/.claude/ /root
+COPY claude_code/just-prompt/ /root
+COPY claude_code/.env
+COPY claude_code/.env.sample
+COPY claude_code/.mcp.json
+COPY claude_code/just-prompt-mcp.json

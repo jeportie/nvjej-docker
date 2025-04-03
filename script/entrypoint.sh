@@ -101,10 +101,11 @@ else
 fi
 
 # Add MCP servers
-claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem / /
-claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking
-claude mcp add brave-search -- npx -y @modelcontextprotocol/server-brave-search
-claude mcp add puppeteer -- npx -y @modelcontextprotocol/server-puppeteer
+#claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem / /
+#claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking
+#claude mcp add brave-search -- npx -y @modelcontextprotocol/server-brave-search
+
+cd /root/just-prompt && pip install -e . && cd /root/
 
 # Launch zsh.
 exec zsh
