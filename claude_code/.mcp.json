@@ -30,7 +30,7 @@
       "command": "npx",
       "args": ["-y", "@suekou/mcp-notion-server"],
       "env": {
-        "NOTION_API_TOKEN":"ntn_HV2729736568Qe8TmAwGPxbA2ozZE4EWg11OCX592y8a9u"
+        "NOTION_API_TOKEN":""
       }
     },
     "sequential-thinking": {
