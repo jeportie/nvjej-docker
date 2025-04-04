@@ -66,4 +66,3 @@ COPY claude_code/just-prompt-mcp.json /root/projects/just-prompt-mcp.json
 # COPY claude_code/just-prompt/ /root/projects/just-prompt
 RUN git clone https://github.com/disler/just-prompt.git /root/projects/just-prompt
 RUN cd /root/projects/just-prompt && pip install -e . && cd /root/projects/
-
