@@ -61,7 +61,7 @@ COPY config/mcpservers.json /root/.mcp/mcpservers.json
 # COPY claude code mcp configs 
 COPY claude_code/.claude/ /root/projects/.claude/
 COPY claude_code/just-prompt/ /root/projects/just-prompt
-#COPY claude_code/.env /root/.env
-COPY claude_code/.env.sample /root/projects/.env.sample
+# COPY claude_code/.env /root/.env
+# COPY claude_code/.env.sample /root/projects/.env.sample
 COPY claude_code/.mcp.json /root/projects/.mcp.json
 COPY claude_code/just-prompt-mcp.json /root/projects/just-prompt-mcp.json
