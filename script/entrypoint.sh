@@ -105,7 +105,7 @@ fi
 #claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking
 #claude mcp add brave-search -- npx -y @modelcontextprotocol/server-brave-search
 
-cd /root/projects/just-prompt && pip install -e . && cd /root/projects/
+#cd /root/projects/just-prompt && pip install -e . && cd /root/projects/
 
 # Launch zsh.
 exec zsh
