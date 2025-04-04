@@ -58,7 +58,7 @@ fi
 
 # Ensure Node.js version and mcp-hub are installed
 NODE_VERSION="v22.14.0"
-MCP_VERSION="1.8.0"
+MCP_VERSION="2.0.1"
 
 # Install Node.js version if not already installed
 if command -v nvm > /dev/null 2>&1; then

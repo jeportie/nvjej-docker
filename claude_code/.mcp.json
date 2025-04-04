@@ -28,10 +28,7 @@
     },
     "notion": {
       "command": "npx",
-      "args": ["-y", "@suekou/mcp-notion-server"],
-      "env": {
-        "NOTION_API_TOKEN":""
-      }
+      "args": ["-y", "@suekou/mcp-notion-server"]
     },
     "sequential-thinking": {
       "command": "npx",
