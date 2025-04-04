@@ -47,10 +47,35 @@ else
     echo "Warning: /sh/load_api_keys.sh not found. Skipping API key loading."
 fi
 
+# Function to display a progress bar
+show_progress() {
+    local duration=$1
+    local interval=0.1
+    local elapsed=0
+    local progress=0
+    local bar_length=50
+
+    while [ $elapsed -lt $duration ]; do
+        progress=$((elapsed * bar_length / duration))
+        printf "\r["
+        for ((i=0; i<bar_length; i++)); do
+            if [ $i -lt $progress ]; then
+                printf "#"
+            else
+                printf " "
+            fi
+        done
+        printf "] %d%%" $((progress * 100 / bar_length))
+        sleep $interval
+        elapsed=$((elapsed + interval))
+    done
+    printf "\n"
+}
+
 # Initialize NVM
 export NVM_DIR="$HOME/.nvm"
 if [ -s "$NVM_DIR/nvm.sh" ]; then
-    source "$NVM_DIR/nvm.sh"
+    source "$NVM_DIR/nvm.sh" > /dev/null 2>&1
     echo "nvm initialized."
 else
     echo "nvm initialization script not found at $NVM_DIR/nvm.sh. Skipping Node.js setup."
@@ -64,7 +89,8 @@ MCP_VERSION="2.0.1"
 if command -v nvm > /dev/null 2>&1; then
     if ! nvm ls "$NODE_VERSION" > /dev/null 2>&1; then
         echo "Installing Node.js $NODE_VERSION via nvm..."
-        nvm install "$NODE_VERSION"
+        nvm install "$NODE_VERSION" > /dev/null 2>&1 &
+        show_progress 10
     else
         echo "Node.js $NODE_VERSION is already installed."
     fi
@@ -74,14 +100,15 @@ fi
 
 # Use the desired Node.js version explicitly before npm install
 if command -v nvm > /dev/null 2>&1; then
-    nvm use "$NODE_VERSION"
+    nvm use "$NODE_VERSION" > /dev/null 2>&1
 fi
 
 # Check if npm is available now before installing mcp-hub
 if command -v npm > /dev/null 2>&1; then
     if ! npm list -g mcp-hub@"$MCP_VERSION" > /dev/null 2>&1; then
         echo "Installing mcp-hub@$MCP_VERSION globally..."
-        npm install -g mcp-hub@"$MCP_VERSION"
+        npm install -g mcp-hub@"$MCP_VERSION" > /dev/null 2>&1 &
+        show_progress 10
     else
         echo "mcp-hub@$MCP_VERSION is already installed."
     fi
@@ -95,18 +122,11 @@ CLAUDE_CODE_VERSION="latest"
 # Check if @anthropic-ai/claude-code is installed globally
 if ! npm list -g @anthropic-ai/claude-code@"$CLAUDE_CODE_VERSION" > /dev/null 2>&1; then
     echo "Installing @anthropic-ai/claude-code@$CLAUDE_CODE_VERSION globally..."
-    npm install -g @anthropic-ai/claude-code@"$CLAUDE_CODE_VERSION"
+    npm install -g @anthropic-ai/claude-code@"$CLAUDE_CODE_VERSION" > /dev/null 2>&1 &
+    show_progress 10
 else
     echo "@anthropic-ai/claude-code@$CLAUDE_CODE_VERSION is already installed."
 fi
 
-# Add MCP servers
-#claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem / /
-#claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking
-#claude mcp add brave-search -- npx -y @modelcontextprotocol/server-brave-search
-
-#cd /root/projects/just-prompt && pip install -e . && cd /root/projects/
-
 # Launch zsh.
 exec zsh
-
