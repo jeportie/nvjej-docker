@@ -49,33 +49,18 @@ fi
 
 # Function to display a progress bar
 show_progress() {
-    local duration=$1
-    local interval=0.1
-    local elapsed=0
-    local progress=0
-    local bar_length=50
-
-    while [ $elapsed -lt $duration ]; do
-        progress=$((elapsed * bar_length / duration))
-        printf "\r["
-        for ((i=0; i<bar_length; i++)); do
-            if [ $i -lt $progress ]; then
-                printf "#"
-            else
-                printf " "
-            fi
-        done
-        printf "] %d%%" $((progress * 100 / bar_length))
-        sleep $interval
-        elapsed=$((elapsed + interval))
+    echo -n "Processing"
+    for i in {1..10}; do
+        echo -n "."
+        sleep 0.01
     done
-    printf "\n"
+    echo ""
 }
 
 # Initialize NVM
 export NVM_DIR="$HOME/.nvm"
 if [ -s "$NVM_DIR/nvm.sh" ]; then
-    source "$NVM_DIR/nvm.sh" > /dev/null 2>&1
+    source "$NVM_DIR/nvm.sh"
     echo "nvm initialized."
 else
     echo "nvm initialization script not found at $NVM_DIR/nvm.sh. Skipping Node.js setup."
@@ -89,8 +74,7 @@ MCP_VERSION="2.0.1"
 if command -v nvm > /dev/null 2>&1; then
     if ! nvm ls "$NODE_VERSION" > /dev/null 2>&1; then
         echo "Installing Node.js $NODE_VERSION via nvm..."
-        nvm install "$NODE_VERSION" > /dev/null 2>&1 &
-        show_progress 10
+        nvm install "$NODE_VERSION"
     else
         echo "Node.js $NODE_VERSION is already installed."
     fi
@@ -100,15 +84,14 @@ fi
 
 # Use the desired Node.js version explicitly before npm install
 if command -v nvm > /dev/null 2>&1; then
-    nvm use "$NODE_VERSION" > /dev/null 2>&1
+    nvm use "$NODE_VERSION"
 fi
 
 # Check if npm is available now before installing mcp-hub
 if command -v npm > /dev/null 2>&1; then
     if ! npm list -g mcp-hub@"$MCP_VERSION" > /dev/null 2>&1; then
         echo "Installing mcp-hub@$MCP_VERSION globally..."
-        npm install -g mcp-hub@"$MCP_VERSION" > /dev/null 2>&1 &
-        show_progress 10
+        npm install -g mcp-hub@"$MCP_VERSION"
     else
         echo "mcp-hub@$MCP_VERSION is already installed."
     fi
