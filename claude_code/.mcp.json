@@ -23,7 +23,7 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/root/projects/lean_desktop"
+        "/root/projects/"
       ]
     },
     "notion": {
