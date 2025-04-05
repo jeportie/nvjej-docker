@@ -114,14 +114,59 @@ cform() {
 }
 
 getgit() {
-  # If repo isn’t provided, assume the current folder’s name (or set a default)
-  local user=${1:-$GIT_USER_DEFAULT}
-  local repo=${2:-${PWD:t}}  # :t returns the tail (folder name)
-  local branch=${3:-$GIT_BRANCH_DEFAULT}
-  local path=${4:?Usage: getgit [user] [repo] [branch] <path/to/file>}
+  local user="$GIT_USER_DEFAULT"
+  local branch="$GIT_BRANCH_DEFAULT"
+  local repo=""
+  local file_path=""
 
-  local url="https://raw.githubusercontent.com/${user}/${repo}/${branch}/${path}"
-  wget "$url"
+  # Parse arguments using a while loop
+  while (( $# )); do
+    case "$1" in
+      -u|--user)
+        user="$2"
+        shift 2
+        ;;
+      -b|--branch)
+        branch="$2"
+        shift 2
+        ;;
+      -*)
+        echo "Unknown option: $1" >&2
+        return 1
+        ;;
+      *)
+        if [ -z "$repo" ]; then
+          repo="$1"
+        elif [ -z "$file_path" ]; then
+          file_path="$1"
+        else
+          echo "Too many arguments." >&2
+          return 1
+        fi
+        shift
+        ;;
+    esac
+  done
+
+  if [ -z "$repo" ] || [ -z "$file_path" ]; then
+    echo "Usage: getgit <repo> <path/to/file> [-u user] [-b branch]" >&2
+    return 1
+  fi
+
+  local url="https://raw.githubusercontent.com/${user}/${repo}/${branch}/${file_path}"
+  echo "Fetching: $url"
+  echo "PATH is: $PATH"
+  echo "wget: $(command -v wget)"
+  echo "curl: $(command -v curl)"
+
+  if type wget &>/dev/null; then
+    wget "$url"
+  elif type curl &>/dev/null; then
+    curl -O "$url"
+  else
+    echo "Error: neither wget nor curl is installed." >&2
+    return 1
+  fi
 }
 
 alias maj="bash /sh/update_makefile.sh"
