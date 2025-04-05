@@ -5,6 +5,8 @@ export SAVEHIST=10000
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
+export GIT_USER_DEFAULT="jeportie"
+export GIT_BRANCH_DEFAULT="main"
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -109,6 +111,17 @@ cform() {
     fi
     break
   done
+}
+
+getgit() {
+  # If repo isn’t provided, assume the current folder’s name (or set a default)
+  local user=${1:-$GIT_USER_DEFAULT}
+  local repo=${2:-${PWD:t}}  # :t returns the tail (folder name)
+  local branch=${3:-$GIT_BRANCH_DEFAULT}
+  local path=${4:?Usage: getgit [user] [repo] [branch] <path/to/file>}
+
+  local url="https://raw.githubusercontent.com/${user}/${repo}/${branch}/${path}"
+  wget "$url"
 }
 
 alias maj="bash /sh/update_makefile.sh"
