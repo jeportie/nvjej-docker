@@ -68,7 +68,7 @@ fi
 
 # Ensure Node.js version and mcp-hub are installed
 NODE_VERSION="v22.14.0"
-MCP_VERSION="2.0.1"
+MCP_VERSION="2.1.0"
 
 # Install Node.js version if not already installed
 if command -v nvm > /dev/null 2>&1; then
@@ -89,9 +89,9 @@ fi
 
 # Check if npm is available now before installing mcp-hub
 if command -v npm > /dev/null 2>&1; then
-    if ! npm list -g mcp-hub@"$MCP_VERSION" > /dev/null 2>&1; then
-        echo "Installing mcp-hub@$MCP_VERSION globally..."
-        npm install -g mcp-hub@"$MCP_VERSION"
+    if ! npm list -g mcp-hub > /dev/null 2>&1; then
+        echo "Installing mcp-hub globally..."
+        npm install -g mcp-hub
     else
         echo "mcp-hub@$MCP_VERSION is already installed."
     fi
