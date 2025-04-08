@@ -22,6 +22,8 @@ RUN git config --global user.name "jeportie"
 
 # Bash Scripts copy ********************************************************** #
 COPY script/update_makefile.sh /sh/update_makefile.sh
+COPY script/run_with_args.sh /sh/run_with_args.sh
+COPY script/val_with_args.sh /sh/val_with_args.sh
 
 # Export API keys
 COPY script/load_api_keys.sh /sh/load_api_keys.sh

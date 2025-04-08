@@ -170,3 +170,5 @@ getgit() {
 }
 
 alias maj="bash /sh/update_makefile.sh"
+alias run_with_args="bash /sh/run_with_args.sh"
+alias val_with_args="bash /sh/val_with_args.sh"
