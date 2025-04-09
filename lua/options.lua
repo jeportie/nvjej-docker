@@ -73,3 +73,52 @@ end
 -- Map F2 to call insert_include_guard() in normal mode.
 vim.keymap.set("n", "<F2>", insert_include_guard, { noremap = true, silent = true })
 
+local function insert_class_guard()
+  -- Check if the current file is a .hpp file.
+  if vim.fn.expand("%:e") ~= "hpp" then
+    vim.notify("This is not a .hpp file.", vim.log.levels.WARN)
+    return
+  end
+
+  -- Get the file name (e.g. "MyClass.hpp") and remove the extension.
+  local filename = vim.fn.expand("%:t")
+  local classname = filename:gsub("%.hpp$", "")
+
+  -- Build the template using Allman formatting.
+  local template = {
+    "# include <iostream>",
+    "# include <string>",
+    "",
+    "class " .. classname,
+    "{",
+    "public:",
+    "\t" .. classname .. "(void);",
+    "\t" .. classname .. "(" .. classname .. " const & src);",
+    "\t~" .. classname .. "(void);",
+    "",
+    "\t" .. classname .. " & operator=(" .. classname .. " const & rhs);",
+    "",
+    "\tint getFoo(void) const;",
+    "",
+    "private:",
+    "\tint _foo;",
+    "};",
+    "",
+    "// Overload operator<< for output streaming",
+    "std::ostream & operator<<(std::ostream & out, " .. classname .. " const & in);",
+    "// Overload operator+ for string concatenation",
+    "std::string operator+(std::string const & lhs, " .. classname .. " const & rhs);",
+  }
+
+  -- Append the template at the end of the current buffer.
+  local total = vim.fn.line("$")
+  vim.api.nvim_buf_set_lines(0, total, total, false, template)
+
+  -- Move the cursor to the start of the inserted block.
+  vim.api.nvim_win_set_cursor(0, { total + 1, 0 })
+  vim.cmd("startinsert")
+end
+
+-- Map F3 key in normal mode to call insert_class_guard()
+vim.keymap.set("n", "<F3>", insert_class_guard, { noremap = true, silent = true })
+
