@@ -71,3 +71,6 @@ RUN cd /root/projects/just-prompt && pip install -e . && cd /root/projects/
 
 # COPY zsh
 COPY config/nvjej.zshrc /root/.zshrc
+
+# COPY 42 clang-format
+COPY config/42form.clang-format /root/.clang-format-styles/42form
