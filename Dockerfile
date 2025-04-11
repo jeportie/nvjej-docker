@@ -49,6 +49,7 @@ COPY lua/lazy.lua /root/.config/nvim/lua/plugins/lazy.lua
 COPY lua/mappings.lua /root/.config/nvim/lua/custom/mappings.lua
 COPY lua/null-ls.lua /root/.config/nvim/lua/custom/configs/null-ls.lua
 COPY lua/mappings.lua /root/.local/share/nvim/lazy/NvChad/lua/nvchad/mappings.lua
+COPY lua/term_init.lua /root/.local/share/nvim/lazy/ui/lua/nvchad/term/init.lua
 # Trigger lazy.nvim to sync plugins in headless mode ************************* #
 RUN nvim --headless +"Lazy! sync" +qa
 
