@@ -58,6 +58,9 @@ RUN cp -r /root/.cache /root/.default.cache
 RUN cp -r /root/.config /root/.default.config
 RUN cp -r /root/.local /root/.default.local
 
+# COPY AI prompts
+COPY ai_prompts/ /root/.ai_prompts
+
 # COPY avante mcp congif file
 COPY config/mcpservers.json /root/.mcp/mcpservers.json
 
