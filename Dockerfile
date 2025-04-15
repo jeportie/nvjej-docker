@@ -66,3 +66,5 @@ COPY config/mcpservers.json /root/.mcp/mcpservers.json
 COPY config/nvjej.zshrc /root/.zshrc
 # COPY 42 clang-format
 COPY config/42form.clang-format /root/.clang-format-styles/42form
+
+RUN npm install -g mcp-hub
