@@ -93,21 +93,16 @@ local function insert_class_guard()
 		"{",
 		"public:",
 		"\t" .. classname .. "(void);",
-		"\t" .. classname .. "(int const fooNb);",
 		"\t" .. classname .. "(const " .. classname .. "& src);",
 		"\t~" .. classname .. "(void);",
 		"",
 		"\t" .. classname .. "& operator=(const " .. classname .. "& rhs);",
 		"",
-		"\tint getFoo(void) const;",
-		"\tstd::string toString(void) const; // serialise class to string",
-		"",
 		"private:",
-		"\tint _foo;",
 		"};",
 		"",
 		"// Overload operator<< for output streaming",
-		"std::ostream & operator<<(std::ostream & out, const " .. classname .. "& in);",
+		"std::ostream & operator<<(std::ostream& out, const " .. classname .. "& in);",
 	}
 
 	-- Ensure the buffer has at least 15 lines.
@@ -136,9 +131,12 @@ local function insert_class_functions_template()
 		return
 	end
 
-	-- Get the file name (e.g. "Default.class.cpp") and extract the base name.
-	local filename = vim.fn.expand("%:t")
-	local classname = filename:match("^[^.]+")
+ 	-- Get the file name (e.g. "Default.class.cpp") and extract the base name.
+ 	local filename = vim.fn.expand("%:t")
+ 	local classname = filename:match("^[^.]+")
+	-- Get the file name (e.g. "Default.class.cpp") and extract the base name without the .cpp extension.
+	local titlename = filename:match("(.+)%.cpp$")
+
 
 	-- Build the template using Allman formatting.
 	local template = {
@@ -146,57 +144,39 @@ local function insert_class_functions_template()
 		"# include <iostream>",
 		"# include <ostream>",
 		"# include <sstream>",
-		"# include \"" .. classname .. ".class.hpp\"",
+		"# include \"" .. titlename .. ".hpp\"",
 		"",
 		classname .. "::" .. classname .. "(void)",
-		": _foo(0)",
 		"{",
-		"\tstd::cout << \"Default constructor called\" << std::endl;",
-		"\treturn;",
-		"}",
-		"",
-		classname .. "::" .. classname .. "(int const fooNb)",
-		": _foo(0)",
-		"{",
-		"\tstd::cout << \"Parametric constructor called\" << std::endl;",
-		"\treturn;",
+		"\tstd::cout << \"[" .. classname .. "] - default constructor called - \" << std::endl;",
 		"}",
 		"",
 		classname .. "::" .. classname .. "(const " .. classname .. "& src)",
 		"{",
-		"\tstd::cout << \"Copy constructor called\" << std::endl;",
+		"\tstd::cout << \"[" .. classname .. "] - copy constructor called - \" << std::endl;",
 		"\t*this = src;",
 		"\treturn;",
 		"}",
 		"",
 		classname .. "::~" .. classname .. "(void)",
 		"{",
-		"\tstd::cout << \"Destructor called\" << std::endl;",
+		"\tstd::cout << \"[" .. classname .. "] - destructor called - \" << std::endl;",
 		"\treturn;",
 		"}",
 		"",
 		classname .. " & " .. classname .. "::operator=(const " .. classname .. "& rhs)",
 		"{",
-		"\tstd::cout << \"Assignment operator called\" << std::endl;",
-		"\tif (this != &rhs)",
-		"\t\tthis->_foo = rhs.getFoo();",
+		"\tstd::cout << \"[" .. classname .. "] - copy assignment operator called - \" << std::endl;",
+		"//\tif (this != &rhs)",
+		"//\t\tthis->_foo = rhs.getFoo();",
 		"\treturn (*this);",
 		"}",
 		"",
-		"std::ostream & operator<<(std::ostream & out, const " .. classname .. "& in)",
-		"{",
-		"\tout << \"The value of _foo is : \" << in.getFoo();",
-		"\treturn (out);",
-		"}",
-		"",
-		"int " .. classname .. "::getFoo(void) const { return (_foo); }",
-		"",
-		"std::string " .. classname .. "::toString(void) const",
-		"{",
-		"\tstd::ostringstream oss;",
-		"\toss << \"" .. classname .. "(_foo=\" << _foo << \")\";",
-		"\treturn (oss.str());",
-		"}",
+		"//std::ostream & operator<<(std::ostream & out, const " .. classname .. "& in)",
+		"//{",
+		"\t//out << \"The value of _foo is : \" << in.getFoo();",
+		"\t//return (out);",
+		"//}",
 	}
 	-- Ensure the buffer has at least 13 lines.
 	local total_lines = vim.fn.line("$")
