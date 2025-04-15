@@ -47,15 +47,15 @@ else
     echo "Warning: /sh/load_api_keys.sh not found. Skipping API key loading."
 fi
 
-# Function to display a progress bar
-show_progress() {
-    echo -n "Processing"
-    for i in {1..10}; do
-        echo -n "."
-        sleep 0.01
-    done
-    echo ""
-}
+# # Function to display a progress bar
+# show_progress() {
+#     echo -n "Processing"
+#     for i in {1..10}; do
+#         echo -n "."
+#         sleep 0.01
+#     done
+#     echo ""
+# }
 
 # Initialize NVM
 export NVM_DIR="$HOME/.nvm"
@@ -97,18 +97,6 @@ if command -v npm > /dev/null 2>&1; then
     fi
 else
     echo "npm not found. Skipping mcp-hub installation."
-fi
-
-# Define the desired version of @anthropic-ai/claude-code
-CLAUDE_CODE_VERSION="latest"
-
-# Check if @anthropic-ai/claude-code is installed globally
-if ! npm list -g @anthropic-ai/claude-code@"$CLAUDE_CODE_VERSION" > /dev/null 2>&1; then
-    echo "Installing @anthropic-ai/claude-code@$CLAUDE_CODE_VERSION globally..."
-    npm install -g @anthropic-ai/claude-code@"$CLAUDE_CODE_VERSION" > /dev/null 2>&1 &
-    show_progress 10
-else
-    echo "@anthropic-ai/claude-code@$CLAUDE_CODE_VERSION is already installed."
 fi
 
 # Launch zsh.

@@ -60,21 +60,9 @@ RUN cp -r /root/.local /root/.default.local
 
 # COPY AI prompts
 COPY ai_prompts/ /root/.ai_prompts
-
 # COPY avante mcp congif file
 COPY config/mcpservers.json /root/.mcp/mcpservers.json
-
-# COPY claude code mcp configs 
-COPY claude_code/.claude/ /root/projects/.claude/
-COPY claude_code/.mcp.json /root/projects/.mcp.json
-COPY claude_code/just-prompt-mcp.json /root/projects/just-prompt-mcp.json
-
-# COPY claude_code/just-prompt/ /root/projects/just-prompt
-RUN git clone https://github.com/disler/just-prompt.git /root/projects/just-prompt
-RUN cd /root/projects/just-prompt && pip install -e . && cd /root/projects/
-
 # COPY zsh
 COPY config/nvjej.zshrc /root/.zshrc
-
 # COPY 42 clang-format
 COPY config/42form.clang-format /root/.clang-format-styles/42form
