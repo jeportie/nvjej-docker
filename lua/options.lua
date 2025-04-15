@@ -143,7 +143,6 @@ local function insert_class_functions_template()
 		"",
 		"# include <iostream>",
 		"# include <ostream>",
-		"# include <sstream>",
 		"# include \"" .. titlename .. ".hpp\"",
 		"",
 		classname .. "::" .. classname .. "(void)",
