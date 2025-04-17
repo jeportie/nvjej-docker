@@ -12,9 +12,10 @@ cmake .. && make
 
 # Run tests and handle results
 if ctest; then
-    echo "All tests passed."
+    echo "\nAll tests passed.\n"
 else
-    cat Testing/Temporary/LastTest.log
+	echo "Tests failed."
+	ctest --rerun-failed --output-on-failure
 fi
 
 # Return to project root and clean up
