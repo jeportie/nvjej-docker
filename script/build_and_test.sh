@@ -12,7 +12,7 @@ cmake .. && make
 
 # Run tests and handle results
 if ctest; then
-#    echo "All tests passed."
+    echo "All tests passed."
 else
     cat Testing/Temporary/LastTest.log
 fi
