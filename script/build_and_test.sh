@@ -9,11 +9,11 @@ cmake .. && make
 
 # Run tests and handle results
 if ctest; then
-    echo "\nAll tests passed.\n"
+    echo "✅ All tests passed. ✅"
 	cd ..
 	rm -rf build
 else
-	echo "Tests failed."
+	echo "❌ Tests failed. ❌"
 	ctest --rerun-failed --output-on-failure
 	cd ..
 	rm -rf build

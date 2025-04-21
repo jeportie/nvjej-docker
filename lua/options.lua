@@ -141,9 +141,9 @@ local function insert_class_functions_template()
 	-- Build the template using Allman formatting.
 	local template = {
 		"",
-		"# include <iostream>",
-		"# include <ostream>",
-		"# include \"" .. titlename .. ".hpp\"",
+		"#include <iostream>",
+		"#include <ostream>",
+		"#include \"" .. titlename .. ".hpp\"",
 		"",
 		classname .. "::" .. classname .. "(void)",
 		"{",
