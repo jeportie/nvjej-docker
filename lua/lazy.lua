@@ -96,7 +96,7 @@ return {
 		opts = {
 			provider = "openai",
 			openai = {
-				endpoint = "https://api.openai.com",
+				endpoint = "https://api.openai.com/v1",
 				model = "gpt-4o-mini", -- your desired model (or use gpt-4o, etc.)
 				timeout = 30000, -- in milliseconds
 				temperature = 0,
