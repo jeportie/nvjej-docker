@@ -30,7 +30,7 @@ COPY script/build_and_test.sh /sh/build_and_test.sh
 COPY script/load_api_keys.sh /sh/load_api_keys.sh
 
 # Install the latest stable Neovim + NVChad Base Disrto ********************** #
-RUN wget https://github.com/neovim/neovim/releases/download/v0.11/nvim-linux-x86_64.tar.gz && \
+RUN wget https://github.com/neovim/neovim/releases/download/v0.11.1/nvim-linux-x86_64.tar.gz && \
     tar -xzf nvim-linux-x86_64.tar.gz && \
     cp -r nvim-linux-x86_64/* /usr/local/ && \
     rm -rf nvim-linux-x86_64.tar.gz nvim-linux-x86_64
