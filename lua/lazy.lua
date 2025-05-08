@@ -102,15 +102,6 @@ return {
 				temperature = 0,
 				max_tokens = 16384,
 				reasoning_effort = "high", -- if needed for reasoning models
-				AvanteModels = {
-					"gpt-4.1",
-					"gpt-4.1-mini",
-					"gpt-4.1-nano",
-					"gpt-4o",
-					"gpt-4o-mini",
-					"gpt-3.5-turbo",
-					"gpt-3.5-turbo-16k",
-				},
 			},
 			system_prompt = function()
 				local hub = require("mcphub").get_hub_instance()

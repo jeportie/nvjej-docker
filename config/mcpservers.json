@@ -22,6 +22,26 @@
         "-y",
         "@modelcontextprotocol/server-puppeteer"
       ]
+    },
+	"taskmaster-ai": {
+			"command": "npx",
+			"args": ["-y", "--package=task-master-ai", "task-master-ai"],
+			"env": {
+			}
+	},
+	"brave-search": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "BRAVE_API_KEY",
+        "mcp/brave-search"
+      ],
+      "env": {
+        "BRAVE_API_KEY": "BSAG_dlOUnwmW4gxiTZDDRwelrDv3_M"
+      }
     }
   }
 }
