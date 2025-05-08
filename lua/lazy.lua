@@ -97,11 +97,20 @@ return {
 			provider = "openai",
 			openai = {
 				endpoint = "https://api.openai.com/v1",
-				model = "gpt-4o-mini", -- your desired model (or use gpt-4o, etc.)
-				timeout = 30000, -- in milliseconds
+				model = "gpt-4.1", -- your desired model (or use gpt-4o, etc.)
+				timeout = 60000, -- in milliseconds
 				temperature = 0,
-				max_tokens = 4096,
-				-- reasoning_effort = "high", -- if needed for reasoning models
+				max_tokens = 16384,
+				reasoning_effort = "high", -- if needed for reasoning models
+				AvanteModels = {
+					"gpt-4.1",
+					"gpt-4.1-mini",
+					"gpt-4.1-nano",
+					"gpt-4o",
+					"gpt-4o-mini",
+					"gpt-3.5-turbo",
+					"gpt-3.5-turbo-16k",
+				},
 			},
 			system_prompt = function()
 				local hub = require("mcphub").get_hub_instance()
@@ -307,7 +316,7 @@ return {
 		"mfussenegger/nvim-dap",
 	},
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		event = "VeryLazy",
 		opts = function()
 			return require("custom.configs.null-ls")
@@ -396,10 +405,10 @@ return {
 		lazy = true,
 		keys = {
 			-- Global Minimap Controls
-			{ "<leader>nm",  "<cmd>Neominimap toggle<cr>",      desc = "Toggle global minimap" },
-			{ "<leader>no",  "<cmd>Neominimap on<cr>",          desc = "Enable global minimap" },
-			{ "<leader>nf",  "<cmd>Neominimap off<cr>",         desc = "Disable global minimap" },
-			{ "<leader>nr",  "<cmd>Neominimap refresh<cr>",     desc = "Refresh global minimap" },
+			{ "<leader>nm", "<cmd>Neominimap toggle<cr>",  desc = "Toggle global minimap" },
+			{ "<leader>no", "<cmd>Neominimap on<cr>",      desc = "Enable global minimap" },
+			{ "<leader>nf", "<cmd>Neominimap off<cr>",     desc = "Disable global minimap" },
+			{ "<leader>nr", "<cmd>Neominimap refresh<cr>", desc = "Refresh global minimap" },
 		},
 		cmd = { "Neominimap" }, -- Load only when the Neominimap command is used
 		-- init = function()
