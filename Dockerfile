@@ -68,3 +68,4 @@ COPY config/nvjej.zshrc /root/.zshrc
 COPY config/42form.clang-format /root/.clang-format-styles/42form
 
 RUN npm install -g mcp-hub
+RUN npm install -g task-master-ai
