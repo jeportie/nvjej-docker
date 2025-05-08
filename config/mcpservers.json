@@ -27,6 +27,7 @@
 			"command": "npx",
 			"args": ["-y", "--package=task-master-ai", "task-master-ai"],
 			"env": {
+				"OPENROUTER_API_KEY": "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"
 			}
 	},
 	"brave-search": {
@@ -38,10 +39,7 @@
         "-e",
         "BRAVE_API_KEY",
         "mcp/brave-search"
-      ],
-      "env": {
-        "BRAVE_API_KEY": "BSAG_dlOUnwmW4gxiTZDDRwelrDv3_M"
-      }
-    }
+      ]
+	}
   }
 }
