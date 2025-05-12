@@ -27,6 +27,11 @@ map("n", "<leader>co", "<cmd>CompilerOpen<CR>", { desc = "toogle compiler menu"}
 map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "toogle code_action menu"})
 -- Map lspsaga Code Action
 map("n", "<leader>cd", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "toogle next diagnostic menu"})
+-- Show cursor diagnostics with Enter
+map("n", "<CR>", "<cmd>Lspsaga show_cursor_diagnostics<CR>", {
+  silent = true,
+  desc = "Show diagnostics under cursor (Lspsaga)",
+})
 
 -- Remap ";" in normal mode to enter command mode
 map("n", ";", ":", { desc = "Enter command mode" })
