@@ -21,7 +21,6 @@ vim.api.nvim_create_autocmd("CursorMoved", {
   end,
 })
 
--- Map lspsaga Code Action
 map("n", "<leader>co", "<cmd>CompilerOpen<CR>", { desc = "toogle compiler menu"})
 
 -- Map lspsaga Code Action

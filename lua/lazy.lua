@@ -315,8 +315,6 @@ return {
 			return require("custom.configs.null-ls")
 		end,
 	},
-
-
 	{
 		"williamboman/mason.nvim",
 		dependencies = {
