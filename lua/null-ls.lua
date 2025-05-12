@@ -5,7 +5,6 @@ null_ls.setup({
   sources = {
     -- formatting
     null_ls.builtins.formatting.clang_format,
-	null_ls.builtins.diagnostics.cppcheck,
   },
 })
 
