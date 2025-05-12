@@ -308,11 +308,15 @@ return {
 	},
 	{
 		"nvimtools/none-ls.nvim",
-		event = "VeryLazy",
+		-- fire before any file is read so it can inject into LSP
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = function()
 			return require("custom.configs.null-ls")
 		end,
 	},
+
+
 	{
 		"williamboman/mason.nvim",
 		dependencies = {
